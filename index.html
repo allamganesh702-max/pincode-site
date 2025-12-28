@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Indian Pincode Finder</title>
+</head>
+<body style="font-family:Arial; padding:20px">
+
+<h1>Indian Pincode Finder</h1>
+<p>Search Indian pincode details</p>
+
+<input type="text" id="pin" placeholder="Enter 6 digit pincode">
+<button onclick="search()">Search</button>
+
+<div id="result"></div>
+
+<script>
+function search() {
+  let pin = document.getElementById("pin").value;
+  fetch("https://api.postalpincode.in/pincode/" + pin)
+    .then(res => res.json())
+    .then(data => {
+      if (data[0].Status === "Success") {
+        let p = data[0].PostOffice[0];
+        document.getElementById("result").innerHTML =
+          "<p>Area: " + p.Name + "</p>" +
+          "<p>District: " + p.District + "</p>" +
+          "<p>State: " + p.State + "</p>";
+      } else {
+        document.getElementById("result").innerHTML = "Invalid Pincode";
+      }
+    });
+}
+</script>
+
+</body>
+</html>
