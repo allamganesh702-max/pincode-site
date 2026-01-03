@@ -252,6 +252,13 @@ function toggleDark() {
   document.body.classList.toggle("dark");
 }
 </script>
+<script>
+  // Improve page load
+  document.addEventListener("DOMContentLoaded", () => {
+    // Prevent layout shift
+    document.body.style.minHeight = "100vh";
+  });
+</script>
 
 </body>
 </html>
